@@ -1,0 +1,24 @@
+.about-container {
+  max-width: 600px; /* Limite la largeur */
+  margin: 20px auto; /* Centre le bloc au milieu de la page */
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-left: 5px solid #4caf50; /* Barre verte sur le côté */
+  background-color: white;
+  font-family: sans-serif;
+}
+
+h1 {
+  color: #2e7d32; /* Vert foncé */
+}
+
+ul {
+  background-color: #f1f8e9; /* Fond vert très clair pour la liste */
+  padding: 20px 40px;
+  border-radius: 8px;
+}
+
+li {
+  margin-bottom: 10px;
+  color: #555;
+}

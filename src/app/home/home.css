@@ -1,0 +1,56 @@
+/* ... garde ton ancien CSS home-container ... */
+
+.counter-box {
+  background-color: #fff3e0;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ffcc80;
+  color: #e65100;
+}
+
+.loading {
+  font-style: italic;
+  color: #757575;
+  font-size: 1.2rem;
+  animation: clignoter 1s infinite;
+}
+
+.task-list {
+  text-align: left;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  list-style-type: none;
+}
+
+.task-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+@keyframes clignoter {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.add-task-box {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+}

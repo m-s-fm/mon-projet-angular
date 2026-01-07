@@ -1,0 +1,28 @@
+<div class="home-container">
+  <h1>Bienvenue sur l'Accueil !</h1>
+
+  <div class="counter-box">
+    <p>
+      Temps écoulé : <strong>{{ count / 2 }}</strong> secondes
+    </p>
+  </div>
+
+  <hr />
+
+  <div class="add-task-box">
+    <input #newTaskInput type="text" placeholder="Nouvelle tâche..." />
+    <button (click)="add(newTaskInput.value); newTaskInput.value = ''">Ajouter</button>
+  </div>
+
+  <hr />
+
+  @if (tasks$ | async; as tasks) {
+  <ul class="task-list">
+    @for (task of tasks; track task.id) {
+    <li>{{ task.title }}</li>
+    }
+  </ul>
+  } @else {
+  <p class="loading">Chargement des tâches en cours...</p>
+  }
+</div>
