@@ -1,0 +1,31 @@
+<div class="highlight-overlay" (click)="close.emit()">
+    <div class="highlight-card" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="close.emit()">
+            <i class="bi bi-x-lg">X</i>
+        </button>
+        <div class="highlight-header">
+            <h2>Éditer la tâche</h2>
+        </div>
+        <div class="highlight-content">
+            <div style="margin-bottom: 1rem;">
+                <label for="taskTitle" style="display: block; margin-bottom: 0.5rem; text-align: left;">Titre</label>
+                <input id="taskTitle" type="text" [(ngModel)]="editedTitle"
+                    style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <label for="taskDescription"
+                    style="display: block; margin-bottom: 0.5rem; text-align: left;">Description</label>
+                <textarea id="taskDescription" [(ngModel)]="editedDescription" rows="3"
+                    style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
+            </div>
+
+            <div class="actions" style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                <button (click)="close.emit()"
+                    style="padding: 8px 16px; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer;">Annuler</button>
+                <button (click)="onSave()"
+                    style="padding: 8px 16px; border: none; background: #0d6efd; color: white; border-radius: 4px; cursor: pointer;">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
+</div>

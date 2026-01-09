@@ -1,0 +1,30 @@
+@if (stats$ | async; as stats) {
+<div class="stats-container">
+    <div class="stat-card total">
+        <div class="stat-value">{{ stats.total }}</div>
+        <div class="stat-label">Total</div>
+    </div>
+
+    <div class="stat-card pending">
+        <div class="stat-value">{{ stats.pending }}</div>
+        <div class="stat-label">En cours</div>
+    </div>
+
+    <div class="stat-card completed">
+        <div class="stat-value">{{ stats.completed }}</div>
+        <div class="stat-label">Terminées</div>
+    </div>
+</div>
+
+<div class="progress-section">
+    <div class="progress-header">
+        <span>Progression globale</span>
+        <span>{{ stats.percentage | number:'1.0-0' }}%</span>
+    </div>
+    <div class="progress-bar-bg">
+        <div class="progress-bar-fill" [style.width.%]="stats.percentage"></div>
+    </div>
+</div>
+} @else {
+<div class="loading-stats">Chargement des statistiques...</div>
+}
