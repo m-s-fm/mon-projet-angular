@@ -17,29 +17,23 @@ export class TasksPageComponent {
   private viewContainerRef = inject(ViewContainerRef);
   private currentComponentRef: any = null;
 
-  tasks$ = this.taskService.getTasks();
+  tasks$ = this.taskService.tasks$;
 
   addTask(title: string) {
     if (!title) return;
-    this.taskService.addTask(title).subscribe(() => {
-      this.tasks$ = this.taskService.getTasks();
-    });
+    this.taskService.addTask(title).subscribe();
   }
 
   deleteTask(id: number) {
-    this.taskService.deleteTask(id).subscribe(() => {
-      this.tasks$ = this.taskService.getTasks();
-    });
+    this.taskService.deleteTask(id).subscribe();
   }
 
   toggleComplete(task: any) {
     this.taskService.toggleCompleted(task.id);
-    this.tasks$ = this.taskService.getTasks();
   }
 
   highlightTask(task: any) {
     this.taskService.toggleHighlight(task.id);
-    this.tasks$ = this.taskService.getTasks();
 
     if (task.isHighlighted) {
       this.showHighlightModal(task);
@@ -54,7 +48,6 @@ export class TasksPageComponent {
 
     componentRef.instance.save.subscribe((newData: { title: string, description: string }) => {
       this.taskService.updateTask(task.id, newData.title, newData.description);
-      this.tasks$ = this.taskService.getTasks();
       this.clearDynamicComponent();
     });
 

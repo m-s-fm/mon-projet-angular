@@ -13,7 +13,7 @@ import { TaskService } from '../../../task.service';
 export class TaskStatsComponent {
     private taskService = inject(TaskService);
 
-    stats$ = this.taskService.getTasks().pipe(
+    stats$ = this.taskService.tasks$.pipe(
         map(tasks => {
             const total = tasks.length;
             const completed = tasks.filter(t => t.completed).length;

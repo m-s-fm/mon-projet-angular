@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TaskHighlight } from './task-highlight';
 
 describe('TaskHighlight', () => {
@@ -10,14 +9,20 @@ describe('TaskHighlight', () => {
     await TestBed.configureTestingModule({
       imports: [TaskHighlight]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TaskHighlight);
+
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('devrait afficher le titre dans le DOM', () => {
+    component.title = 'Ma tâche';
+
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('h2')?.textContent)
+      .toContain('Ma tâche');
   });
 });

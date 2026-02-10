@@ -11,4 +11,5 @@ import { CommonModule } from '@angular/common';
 export class TaskHighlight {
   @Input() task: any;
   @Output() close = new EventEmitter<void>();
+  title = '';
 }

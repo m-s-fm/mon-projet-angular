@@ -30,4 +30,8 @@ export class TaskEdit {
             description: this.editedDescription
         });
     }
+
+    onCancel() {
+        this.close.emit();
+    }
 }

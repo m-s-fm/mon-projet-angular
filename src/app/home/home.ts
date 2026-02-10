@@ -13,5 +13,5 @@ import { TaskStatsComponent } from '../features/tasks/task-stats/task-stats';
 })
 export class HomeComponent {
   private taskService = inject(TaskService);
-  tasks$ = this.taskService.getTasks();
+  tasks$ = this.taskService.tasks$;
 }
