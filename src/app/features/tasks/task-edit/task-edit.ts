@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -8,24 +8,26 @@ import { FormsModule } from '@angular/forms';
     imports: [CommonModule, FormsModule],
     templateUrl: './task-edit.html',
     styleUrl: './task-edit.css',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskEdit {
-    @Input() task: any;
-    @Output() save = new EventEmitter<{ title: string, description: string }>();
+    @Input() title = '';
+    @Input() description = '';
+    @Input() taskId = 0;
+    @Output() onSave = new EventEmitter<{ id: number, title: string, description: string }>();
     @Output() close = new EventEmitter<void>();
 
     editedTitle = '';
     editedDescription = '';
 
     ngOnInit() {
-        if (this.task) {
-            this.editedTitle = this.task.title;
-            this.editedDescription = this.task.description || '';
-        }
+        this.editedTitle = this.title;
+        this.editedDescription = this.description;
     }
 
-    onSave() {
-        this.save.emit({
+    save() {
+        this.onSave.emit({
+            id: this.taskId,
             title: this.editedTitle,
             description: this.editedDescription
         });

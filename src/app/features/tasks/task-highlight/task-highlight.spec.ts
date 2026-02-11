@@ -10,7 +10,7 @@ describe('TaskHighlight', () => {
     await TestBed.configureTestingModule({
       imports: [TaskHighlight]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TaskHighlight);
     component = fixture.componentInstance;

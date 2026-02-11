@@ -1,4 +1,4 @@
-import { Component, inject, ViewContainerRef } from '@angular/core';
+import { Component, inject, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { TaskService } from '../../../task.service';
 import { TaskHighlight } from '../task-highlight/task-highlight';
@@ -11,6 +11,7 @@ import '@angular/compiler';
   imports: [AsyncPipe],
   templateUrl: './tasks-page.html',
   styleUrl: './tasks-page.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksPageComponent {
   private taskService = inject(TaskService);
@@ -50,10 +51,12 @@ export class TasksPageComponent {
     this.clearDynamicComponent();
     const componentRef = this.viewContainerRef.createComponent(TaskEdit);
     this.currentComponentRef = componentRef;
-    componentRef.instance.task = task;
+    componentRef.instance.title = task.title;
+    componentRef.instance.description = task.description;
+    componentRef.instance.taskId = task.id;
 
-    componentRef.instance.save.subscribe((newData: { title: string, description: string }) => {
-      this.taskService.updateTask(task.id, newData.title, newData.description);
+    componentRef.instance.onSave.subscribe((newData: { id: number, title: string, description: string }) => {
+      this.taskService.updateTask(newData.id, newData.title, newData.description);
       this.tasks$ = this.taskService.getTasks();
       this.clearDynamicComponent();
     });
@@ -67,7 +70,8 @@ export class TasksPageComponent {
     this.clearDynamicComponent();
     const componentRef = this.viewContainerRef.createComponent(TaskHighlight);
     this.currentComponentRef = componentRef;
-    componentRef.instance.task = task;
+    componentRef.instance.title = task.title;
+    componentRef.instance.description = task.description;
     componentRef.instance.close.subscribe(() => this.clearDynamicComponent());
   }
 
