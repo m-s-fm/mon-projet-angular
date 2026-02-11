@@ -1,0 +1,11 @@
+@if (notification$ | async; as notification) {
+<div class="notification-toast" [ngClass]="notification.type">
+    <div class="content">
+        <i class="bi" [class.bi-check-circle-fill]="notification.type === 'success'"
+            [class.bi-exclamation-circle-fill]="notification.type === 'error'"
+            [class.bi-info-circle-fill]="notification.type === 'info'">
+        </i>
+        <span>{{ notification.message }}</span>
+    </div>
+</div>
+}

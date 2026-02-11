@@ -18,3 +18,9 @@
 - `| async` gère l'abonnement et le désabonnement 
   automatiquement.
 - Le flux reste cohérent entre le service et la vue.
+
+### 4. Optimisations et Sécurité (Mise à jour)
+- **Performance (OnPush)** : `TaskHighlight`, `TasksPage`, et `TaskEdit` utilisent désormais `ChangeDetectionStrategy.OnPush` pour minimiser les cycles de détection de changement.
+- **Réduction du temps de chargement** : Remplacement du lien CDN pour `bootstrap-icons` par un package npm local, éliminant une requête bloquante au démarrage.
+- **Sécurité (XSS)** : Audit de sécurité réalisé. Aucun usage de `innerHTML` ou script inline détecté. Tests unitaires ajoutés pour vérifier l'échappement des inputs malveillants.
+

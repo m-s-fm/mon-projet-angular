@@ -1,28 +1,28 @@
-<div class="home-container">
-  <h1>Bienvenue sur l'Accueil !</h1>
-
-  <div class="counter-box">
-    <p>
-      Temps écoulé : <strong>{{ count / 2 }}</strong> secondes
-    </p>
+<div class="container fade-in">
+  <div class="text-center mb-4">
+    <h1>Bienvenue sur TaskBoard Pro</h1>
   </div>
 
-  <hr />
+  <app-task-stats class="mb-4 d-block"></app-task-stats>
 
-  <div class="add-task-box">
-    <input #newTaskInput type="text" placeholder="Nouvelle tâche..." />
-    <button (click)="add(newTaskInput.value); newTaskInput.value = ''">Ajouter</button>
+  <div class="card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Vos tâches en cours</h2>
+      <a routerLink="/tasks" class="btn btn-primary">Gérer mes tâches</a>
+    </div>
+
+    <div class="task-list-preview">
+      <ul *ngIf="tasks$ | async as tasks; else loading" class="clean-list">
+        <li *ngFor="let task of tasks" class="task-item">
+          <span class="task-title">{{ task.title }}</span>
+          <span class="badge" *ngIf="task.isHighlighted">Prioritaire</span>
+        </li>
+      </ul>
+      <ng-template #loading>
+        <div class="loading-state">
+          Chargement des tâches...
+        </div>
+      </ng-template>
+    </div>
   </div>
-
-  <hr />
-
-  @if (tasks$ | async; as tasks) {
-  <ul class="task-list">
-    @for (task of tasks; track task.id) {
-    <li>{{ task.title }}</li>
-    }
-  </ul>
-  } @else {
-  <p class="loading">Chargement des tâches en cours...</p>
-  }
 </div>

@@ -1,0 +1,20 @@
+<div class="highlight-overlay" (click)="close.emit()">
+    <div class="highlight-card" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="close.emit()">
+            <i class="bi bi-x-lg">X</i>
+        </button>
+        <div class="highlight-header">
+            <span class="highlight-icon">
+                <i class="bi bi-star-fill">★</i>
+            </span>
+            <h2>Tâche mise en avant</h2>
+        </div>
+        <div class="highlight-content">
+            <h3>{{ title }}</h3>
+            <p>{{ description || 'Aucune description' }}</p>
+            <div class="task-meta">
+                <!-- Additional meta info if needed -->
+            </div>
+        </div>
+    </div>
+</div>

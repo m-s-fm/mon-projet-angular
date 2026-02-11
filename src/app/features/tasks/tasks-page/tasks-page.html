@@ -1,0 +1,58 @@
+<div class="container fade-in">
+  <div class="header-section mb-4">
+    <h2>Gestion des Tâches</h2>
+    <p class="text-muted">Ajoutez, modifiez et organisez vos tâches.</p>
+  </div>
+
+  <div class="card add-task-card mb-4">
+    <div class="input-group">
+      <input #newTaskInput type="text" placeholder="Ajouter une nouvelle tâche..."
+        (keyup.enter)="addTask(newTaskInput.value); newTaskInput.value = ''" />
+      <button class="btn btn-primary" (click)="addTask(newTaskInput.value); newTaskInput.value = ''">
+        <i class="bi bi-plus-lg"></i> Ajouter
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    @if (tasks$ | async; as tasks) {
+    <ul class="task-list">
+      @for (task of tasks; track task.id) {
+      <li class="task-row fade-in-item">
+        <div class="task-content" [class.completed]="task.completed">
+          <i class="bi star-icon" [class.bi-star-fill]="task.isHighlighted" [class.bi-star]="!task.isHighlighted"
+            [class.active]="task.isHighlighted" (click)="highlightTask(task)" title="Mettre en avant">
+          </i>
+          <div class="task-details">
+            <span class="task-title">{{ task.title }}</span>
+            @if (task.description) {
+            <span class="task-desc">{{ task.description }}</span>
+            }
+          </div>
+        </div>
+
+        <div class="task-actions">
+          <button class="btn btn-sm btn-outline-action" [class.btn-success-light]="!task.completed"
+            [class.btn-secondary-light]="task.completed" (click)="toggleComplete(task)"
+            title="{{ task.completed ? 'Marquer comme non terminé' : 'Terminer' }}">
+            <i class="bi" [class.bi-check-lg]="!task.completed" [class.bi-arrow-counterclockwise]="task.completed"></i>
+          </button>
+
+          <button class="btn btn-sm btn-outline-action btn-edit" (click)="editTask(task)" title="Éditer">
+            <i class="bi bi-pencil"></i>
+          </button>
+
+          <button class="btn btn-sm btn-outline-action btn-delete" (click)="deleteTask(task.id)" title="Supprimer">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </li>
+      }
+    </ul>
+    } @else {
+    <div class="loading-state">
+      <div class="spinner"></div> Chargement de vos tâches...
+    </div>
+    }
+  </div>
+</div>

@@ -1,37 +1,17 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common'; // Import CommonModule
 import { TaskService } from '../task.service';
+import { TaskStatsComponent } from '../features/tasks/task-stats/task-stats';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [RouterLink, CommonModule, TaskStatsComponent],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent {
   private taskService = inject(TaskService);
-
   tasks$ = this.taskService.getTasks();
-
-  count = 0;
-  intervalId: any;
-
-  ngOnInit() {
-    this.intervalId = setInterval(() => {
-      this.count++;
-    }, 500);
-  }
-
-  ngOnDestroy() {
-    if (this.intervalId) clearInterval(this.intervalId);
-  }
-
-  add(title: string) {
-    if (!title) return;
-
-    this.taskService.addTask(title);
-
-    this.tasks$ = this.taskService.getTasks();
-  }
 }
