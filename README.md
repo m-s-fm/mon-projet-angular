@@ -12,7 +12,7 @@
   à nouveau la liste mise à jour.
 - La vue est automatiquement réactualisée sans rechargement.
 
-### 3. Points clés retenus
+
 - Pas besoin d'appeler `getTasks()` à chaque fois : 
   la donnée est **vivante**.
 - `| async` gère l'abonnement et le désabonnement 
